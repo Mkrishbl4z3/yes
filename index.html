@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dino Runner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="game-header">
+        <div>
+          <h1>Dino Runner</h1>
+          <p>Press <strong>Space</strong> or tap to jump. Dodge the cacti!</p>
+        </div>
+        <div class="scoreboard">
+          <div>Score: <span id="score">0</span></div>
+          <div>Best: <span id="best">0</span></div>
+        </div>
+      </header>
+
+      <section class="game-panel">
+        <canvas id="game" width="900" height="260" aria-label="Dino Runner game"></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <h2 id="overlay-title">Tap to start</h2>
+            <p id="overlay-message">Press Space or tap to jump.</p>
+            <button id="start-button">Start</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="game-footer">
+        <button id="reset-button" class="ghost">Reset Best Score</button>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
