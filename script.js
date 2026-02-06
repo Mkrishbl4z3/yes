@@ -9,6 +9,39 @@ const scoreEl = document.getElementById("score");
 const bestEl = document.getElementById("best");
 
 const groundY = 210;
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+const gravity = 0.55;
+const jumpVelocity = -14.5;
+const obstacleSpacing = 260;
+const baseSpeed = 4;
+
+const bestScoreKey = "dino-runner-best";
+
+const safeStorage = {
+  get(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (error) {
+      return null;
+    }
+  },
+  set(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      return;
+    }
+  },
+  remove(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      return;
+    }
+  },
+};
+
+=======
 const gravity = 0.65;
 const jumpVelocity = -12;
 const obstacleSpacing = 220;
@@ -16,6 +49,7 @@ const baseSpeed = 4.5;
 
 const bestScoreKey = "dino-runner-best";
 
+>>>>>>> main
 const dino = {
   x: 80,
   y: groundY,
@@ -27,7 +61,11 @@ const dino = {
 
 let obstacles = [];
 let score = 0;
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+let bestScore = Number(safeStorage.get(bestScoreKey)) || 0;
+=======
 let bestScore = Number(localStorage.getItem(bestScoreKey)) || 0;
+>>>>>>> main
 let running = false;
 let lastTime = 0;
 let speed = baseSpeed;
@@ -59,7 +97,11 @@ function updateScore() {
 function spawnObstacle() {
   const height = 28 + Math.random() * 28;
   const width = 18 + Math.random() * 20;
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+  const gap = obstacleSpacing + Math.random() * 180;
+=======
   const gap = obstacleSpacing + Math.random() * 140;
+>>>>>>> main
   const lastX = obstacles.length ? obstacles[obstacles.length - 1].x : 900;
   obstacles.push({
     x: lastX + gap,
@@ -86,7 +128,11 @@ function endGame() {
   startButton.textContent = "Restart";
   if (score > bestScore) {
     bestScore = Math.floor(score);
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+    safeStorage.set(bestScoreKey, bestScore.toString());
+=======
     localStorage.setItem(bestScoreKey, bestScore.toString());
+>>>>>>> main
     bestEl.textContent = bestScore.toString();
   }
 }
@@ -112,10 +158,32 @@ function drawGround() {
 }
 
 function drawDino() {
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+  const bodyX = dino.x;
+  const bodyY = dino.y + 10;
+  const bodyWidth = dino.width;
+  const bodyHeight = dino.height - 10;
+  const headWidth = 26;
+  const headHeight = 18;
+  const headX = bodyX + bodyWidth - headWidth + 4;
+  const headY = dino.y;
+
+  context.fillStyle = "#1c2333";
+  context.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
+  context.fillRect(headX, headY, headWidth, headHeight);
+
+  context.fillStyle = "#ffffff";
+  context.fillRect(headX + 16, headY + 6, 4, 4);
+
+  context.fillStyle = "#1c2333";
+  context.fillRect(bodyX + 6, bodyY + bodyHeight - 6, 6, 6);
+  context.fillRect(bodyX + 20, bodyY + bodyHeight - 6, 6, 6);
+=======
   context.fillStyle = "#1c2333";
   context.fillRect(dino.x, dino.y, dino.width, dino.height);
   context.fillStyle = "#ffffff";
   context.fillRect(dino.x + 28, dino.y + 10, 6, 6);
+>>>>>>> main
 }
 
 function drawObstacles() {
@@ -157,6 +225,21 @@ function update(delta) {
     spawnObstacle();
   }
 
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+  score += delta * 0.018;
+  speed = baseSpeed + score * 0.0035;
+}
+
+function checkCollisions() {
+  const inset = 6;
+  return obstacles.some((obstacle) => {
+    const hitX =
+      dino.x + inset < obstacle.x + obstacle.width &&
+      dino.x + dino.width - inset > obstacle.x;
+    const hitY =
+      dino.y + inset < obstacle.y + obstacle.height &&
+      dino.y + dino.height - inset > obstacle.y;
+=======
   score += delta * 0.02;
   speed = baseSpeed + score * 0.004;
 }
@@ -165,6 +248,7 @@ function checkCollisions() {
   return obstacles.some((obstacle) => {
     const hitX = dino.x < obstacle.x + obstacle.width && dino.x + dino.width > obstacle.x;
     const hitY = dino.y < obstacle.y + obstacle.height && dino.y + dino.height > obstacle.y;
+>>>>>>> main
     return hitX && hitY;
   });
 }
@@ -207,7 +291,11 @@ startButton.addEventListener("click", () => {
 
 resetButton.addEventListener("click", () => {
   bestScore = 0;
+<<<<<<< codex/create-dinosaur-game-x9h0t8
+  safeStorage.remove(bestScoreKey);
+=======
   localStorage.removeItem(bestScoreKey);
+>>>>>>> main
   bestEl.textContent = "0";
 });
 
